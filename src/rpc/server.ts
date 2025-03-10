@@ -16,6 +16,7 @@ import Fastify, {
     type FastifyReply,
     type FastifyRequest
 } from "fastify"
+import cors from "@fastify/cors"
 import type { Registry } from "prom-client"
 import { toHex } from "viem"
 import type * as WebSocket from "ws"
@@ -97,6 +98,11 @@ export class Server {
             options: {
                 maxPayload: config.websocketMaxPayloadSize
             }
+        })
+
+        this.fastify.register(cors, {
+            origin: "*",
+            methods: ["POST", "GET", "OPTIONS"]
         })
 
         this.fastify.addHook("onResponse", (request, reply) => {
