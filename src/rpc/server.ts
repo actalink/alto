@@ -101,7 +101,7 @@ export class Server {
         })
 
         this.fastify.register(cors, {
-            origin: "*.acta.link",
+            origin: true,
             methods: ["POST", "GET", "OPTIONS"]
         })
 
